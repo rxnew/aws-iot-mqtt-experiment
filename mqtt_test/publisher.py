@@ -2,7 +2,7 @@ import json
 import time
 import uuid
 
-import aws
+from . import aws
 
 
 def main():

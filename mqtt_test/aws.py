@@ -3,7 +3,7 @@ import os
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 from requests import certs
 
-from config import (
+from .config import (
     AWS_IOT_HOST, AWS_IOT_PORT, AWS_IOT_ROOTCA, AWS_IOT_CERTIFICATE, AWS_IOT_PRICATE_KEY,
 )
 

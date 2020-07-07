@@ -5,7 +5,7 @@ from datetime import datetime
 
 from pytz import timezone
 
-import aws
+from . import aws
 
 
 def on_message(client, userdata, message):

@@ -1,0 +1,26 @@
+version: "3.0"
+
+services:
+  pub:
+    image: mqtt-test
+    container_name: mqtt-test-pub
+    build: .
+    tty: true
+    cap_add:
+      - NET_ADMIN
+    command: publish
+    volumes:
+      - ./cert:/opt/app/cert
+      - ./.env:/opt/app/.env
+
+  sub:
+    image: mqtt-test
+    container_name: mqtt-test-sub
+    build: .
+    tty: true
+    cap_add:
+      - NET_ADMIN
+    command: subscribe
+    volumes:
+      - ./cert:/opt/app/cert
+      - ./.env:/opt/app/.env

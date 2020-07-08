@@ -2,6 +2,10 @@
 
 ## Quick Start
 
+Get a device certificate from AWS IoT with reference to [an official document](https://docs.aws.amazon.com/iot/latest/developerguide/create-device-certificate.html).
+
+Create `.env` file with reference to `.env.sample`.
+
 Start a publisher:
 
 ```bash

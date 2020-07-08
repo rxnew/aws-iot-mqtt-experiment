@@ -122,13 +122,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-# AWS SAM
-.aws-sam
-/packaged.yml
-
-# Vagrant
-.vagrant
-
-# Certificate files
-/cert/

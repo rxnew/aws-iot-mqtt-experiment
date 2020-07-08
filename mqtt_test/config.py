@@ -1,23 +1,36 @@
-#!/usr/bin/env python
-# coding: utf-8
 import os.path
-from os.path import join
 
 from dotenv import load_dotenv
 
-basedir = join(os.path.abspath(os.path.dirname(__file__)), "../")
-dotenv_path = join(basedir, 'conf/.env')
-load_dotenv(dotenv_path)
+load_dotenv('.env')
 
-# AWS IoT
-AWS_IOT_HOST = os.environ.get("AWS_IOT_HOST")
-AWS_IOT_PORT = os.environ.get("AWS_IOT_PORT")
-AWS_IOT_ROOTCA = os.environ.get("AWS_IOT_ROOTCA")
-AWS_IOT_CERTIFICATE = os.environ.get("AWS_IOT_CERTIFICATE")
-AWS_IOT_PRICATE_KEY = os.environ.get("AWS_IOT_PRICATE_KEY")
-AWS_IOT_PUBLISH_KEY = os.environ.get("AWS_IOT_PUBLISH_KEY")
+AWS_IOT_HOST = os.environ.get('AWS_IOT_HOST')
+AWS_IOT_PORT = os.environ.get('AWS_IOT_PORT')
+AWS_IOT_ROOTCA = os.environ.get('AWS_IOT_ROOTCA')
+AWS_IOT_CERTIFICATE = os.environ.get('AWS_IOT_CERTIFICATE')
+AWS_IOT_PRICATE_KEY = os.environ.get('AWS_IOT_PRICATE_KEY')
+AWS_IOT_BASE_RECONNECT_QUIET_TIME = int(os.environ.get('AWS_IOT_BASE_RECONNECT_QUIET_TIME', '5'))  # sec
+AWS_IOT_MAX_RECONNECT_QUIET_TIME = int(os.environ.get('AWS_IOT_MAX_RECONNECT_QUIET_TIME', '32'))  # sec
+AWS_IOT_STABLE_CONNECTION_TIME = int(os.environ.get('AWS_IOT_STABLE_CONNECTION_TIME', '20'))  # sec
+AWS_IOT_CONNECT_DISCONNECT_TIMEOUT = int(os.environ.get('AWS_IOT_CONNECT_DISCONNECT_TIMEOUT', '10'))  # sec
+AWS_IOT_MQTT_OPERATION_TIMEOUT = int(os.environ.get('AWS_IOT_MQTT_OPERATION_TIMEOUT', '5'))  # sec
 
-# MQTT
-MQTT_HOST = os.environ.get("MQTT_HOST")
-MQTT_PORT = os.environ.get("MQTT_PORT")
-MQTT_KEEPALIVE = os.environ.get("MQTT_KEEPALIVE")
+MQTT_TOPIC = os.environ.get('MQTT_TOPIC', 'test')
+MQTT_QOS = int(os.environ.get('MQTT_QOS', '0'))
+MQTT_PUBLISH_INTERVAL = int(os.environ.get('MQTT_PUBLISH_INTERVAL', '1000'))  # ms
+
+print('=== Configuration ===')
+print(f'AWS_IOT_HOST={AWS_IOT_HOST}')
+print(f'AWS_IOT_PORT={AWS_IOT_PORT}')
+print(f'AWS_IOT_ROOTCA={AWS_IOT_ROOTCA}')
+print(f'AWS_IOT_CERTIFICATE={AWS_IOT_CERTIFICATE}')
+print(f'AWS_IOT_PRICATE_KEY={AWS_IOT_PRICATE_KEY}')
+print(f'AWS_IOT_BASE_RECONNECT_QUIET_TIME={AWS_IOT_BASE_RECONNECT_QUIET_TIME}')
+print(f'AWS_IOT_MAX_RECONNECT_QUIET_TIME={AWS_IOT_MAX_RECONNECT_QUIET_TIME}')
+print(f'AWS_IOT_STABLE_CONNECTION_TIME={AWS_IOT_STABLE_CONNECTION_TIME}')
+print(f'AWS_IOT_CONNECT_DISCONNECT_TIMEOUT={AWS_IOT_CONNECT_DISCONNECT_TIMEOUT}')
+print(f'AWS_IOT_MQTT_OPERATION_TIMEOUT={AWS_IOT_MQTT_OPERATION_TIMEOUT}')
+print(f'MQTT_TOPIC={MQTT_TOPIC}')
+print(f'MQTT_QOS={MQTT_QOS}')
+print(f'MQTT_PUBLISH_INTERVAL={MQTT_PUBLISH_INTERVAL}')
+print('=====================')

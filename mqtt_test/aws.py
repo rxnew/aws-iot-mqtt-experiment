@@ -1,11 +1,13 @@
 import os
+import time
+from datetime import datetime, timedelta, timezone
 
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 from requests import certs
 
-from .config import (
-    AWS_IOT_HOST, AWS_IOT_PORT, AWS_IOT_ROOTCA, AWS_IOT_CERTIFICATE, AWS_IOT_PRICATE_KEY,
-)
+from .config import AWS_IOT_HOST, AWS_IOT_PORT, AWS_IOT_ROOTCA, AWS_IOT_CERTIFICATE, AWS_IOT_PRICATE_KEY, \
+    AWS_IOT_BASE_RECONNECT_QUIET_TIME, AWS_IOT_MAX_RECONNECT_QUIET_TIME, AWS_IOT_STABLE_CONNECTION_TIME, \
+    AWS_IOT_CONNECT_DISCONNECT_TIMEOUT, AWS_IOT_MQTT_OPERATION_TIMEOUT
 
 ECS_CONTAINER_CREDENTIALS_HOST = '169.254.170.2'
 
@@ -43,11 +45,16 @@ def new_mqtt_client(client_id):
     else:
         client = _new_mqtt_client_over_ws(client_id)
     client.configureEndpoint(AWS_IOT_HOST, int(AWS_IOT_PORT))
-    client.configureAutoReconnectBackoffTime(1, 32, 20)
-    client.configureConnectDisconnectTimeout(10)  # 10 sec
-    client.configureMQTTOperationTimeout(5)  # 5 sec
-    client.onOnline = lambda: print('Changed MQTT connection status: online')
-    client.onOffline = lambda: print('Changed MQTT connection status: offline')
+    client.configureAutoReconnectBackoffTime(
+        AWS_IOT_BASE_RECONNECT_QUIET_TIME, AWS_IOT_MAX_RECONNECT_QUIET_TIME, AWS_IOT_STABLE_CONNECTION_TIME)
+    client.configureConnectDisconnectTimeout(AWS_IOT_CONNECT_DISCONNECT_TIMEOUT)
+    client.configureMQTTOperationTimeout(AWS_IOT_MQTT_OPERATION_TIMEOUT)
+
+    tz = timezone(timedelta(hours=+9), 'JST')
+    client.onOnline = lambda: print(
+        '[%s] MQTT connection status: online' % datetime.fromtimestamp(time.time()).astimezone(tz).isoformat())
+    client.onOffline = lambda: print(
+        '[%s] MQTT connection status: offline' % datetime.fromtimestamp(time.time()).astimezone(tz).isoformat())
 
     return client
 

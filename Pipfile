@@ -9,7 +9,6 @@ verify_ssl = true
 awsiotpythonsdk = "*"
 python-dotenv = "*"
 requests = "*"
-pytz = "*"
 
 [requires]
 python_version = "3.7"

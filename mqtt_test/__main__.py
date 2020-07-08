@@ -1,9 +1,5 @@
 import argparse
 
-from dotenv import load_dotenv
-
-load_dotenv('.env')
-
 parser = argparse.ArgumentParser(description='MQTT Test')
 subparsers = parser.add_subparsers()
 

@@ -1,4 +1,6 @@
-# MQTT Test
+# Experiment environment for AWS IoT MQTT
+
+The project to investigate a behavior of AWS IoT client, such as when the network is unstable.
 
 ## Quick Start
 
@@ -18,7 +20,7 @@ Start a subscriber:
 docker-compose up sub
 ```
 
-## Experiment
+## Examples
 
 Provides bandwidth control to the publisher:
 
